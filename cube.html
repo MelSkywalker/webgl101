@@ -11,9 +11,7 @@
 </head>
 <body>
 	<script src="three.js"></script>
-	<script type="module" src="GLTFLoader.js"></script>
 	<script type="module">
-		import { GLTFLoader } from './GLTFLoader.js';
 		import { OrbitControls } from './OrbitControls.js';
 
 		const width = window.innerWidth;
@@ -34,20 +32,22 @@
 		const geometry = new THREE.BoxGeometry(1, 1, 1);
 		const material = new THREE.MeshBasicMaterial({
 			color: 0x00ff00,
-			wireframe: true
+			// wireframe: true
 		});
 		const cube = new THREE.Mesh(geometry, material);
 		scene.add(cube);
 
+		const light = new THREE.HemisphereLight(0xffffff, 0x000000, 2);
+		scene.add(light);
+
 		camera.position.z = 5;
 		const controls = new OrbitControls(camera, renderer.domElement);
 
-
 		function animate() {
-				requestAnimationFrame( animate );
+				requestAnimationFrame(animate);
 
-				// cube.rotation.x += 0.01;
-				// cube.rotation.y += 0.01;
+				cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;
 
 				renderer.render(scene, camera);
 			};
